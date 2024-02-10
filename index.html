@@ -15,53 +15,64 @@
     x-data="app"
     x-init="getGuess"
   >
-    <h1 class="mb-8 text-3xl font-bold">Guess the Number</h1>
-    <p class="mb-4">
-      The computer is thinking of a number between
-      <span class="minmax min relative"
-        ><span x-text="min"></span>
-        <span class="absolute -left-0.5 bottom-0.5 w-2 h-1 bg-purple-300"></span
-      ></span>
-      and
-      <span class="minmax max relative"
-        ><span x-text="max"></span
-        ><span
-          class="absolute -left-0.5 bottom-0.5 w-6 h-1 bg-purple-300"
-        ></span
-      ></span>
-      (inclusive).
-    </p>
-    <p class="mb-8 italic">Guess what that number is.</p>
+    <div x-data="{ inputNumber: 1 }">
+      <h1 class="mb-8 text-3xl font-bold">Guess the Number</h1>
+      <p class="mb-4">
+        The computer.guessData);g of a number between
+        <span class="minmax min relative"
+          ><span x-text="min"></span>
+          <span
+            class="absolute -left-0.5 bottom-0.5 w-2 h-1 bg-purple-300"
+          ></span
+        ></span>
+        and
+        <span class="minmax max relative"
+          ><span x-text="max"></span
+          ><span
+            class="absolute -left-0.5 bottom-0.5 w-6 h-1 bg-purple-300"
+          ></span
+        ></span>
+        (inclusive).
+      </p>
+      <p class="mb-8 italic">Guess what that number is.</p>
 
-    <form
-      @submit.prevent
-      class="flex items-center gap-2 justify-center"
-      x-data="{ inputNumber: 1 }"
-      x-init="$watch('inputNumber', (value) => inputNumber = value === '' ? '' : value < min ? min : value > max ? max : value)"
-      @submit="getHeat(inputNumber)"
-    >
-      <label for="guess">Type a number</label>
-      <input
-        type="number"
-        inputmode="numeric"
-        pattern="[0-9]*"
-        id="guess"
-        name="guess"
-        required
-        class="p-2 border border-solid border-purple-400 rounded text-base"
-        x-model="inputNumber"
-      />
-      <button
-        type="submit"
-        class="relative px-4 py-2 border border-solid border-purple-300 rounded bg-purple-200 hover:bg-purple-300 focus:bg-purple-300 transition-colors active:bg-purple-300 active:inset-x-px active:inset-y-px"
+      <form
+        @submit.prevent
+        class="flex items-center gap-2 justify-center"
+        x-init="$watch('inputNumber', (value) => inputNumber = value === '' ? '' : value < min ? min : value > max ? max : value)"
+        @submit="getHeat(inputNumber)"
       >
-        Guess
-      </button>
-    </form>
+        <label for="guess">Type a number</label>
+        <input
+          type="number"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          id="guess"
+          name="guess"
+          required
+          class="p-2 border border-solid border-purple-400 rounded text-base"
+          x-model="inputNumber"
+        />
+        <button
+          type="submit"
+          class="relative px-4 py-2 border border-solid border-purple-300 rounded bg-purple-200 hover:bg-purple-300 focus:bg-purple-300 transition-colors active:bg-purple-300 active:inset-x-px active:inset-y-px"
+        >
+          Guess
+        </button>
+      </form>
 
-    <p class="mt-8 text-lg"></p>
+      <p class="mt-8 text-lg"></p>
 
-    <ul class="temperature mt-10 inline-block list-none text-left"></ul>
+      <ul class="temperature mt-10 inline-block list-none text-left">
+        <template x-for="(item, index) in guessData" :key="index">
+          <li>
+            <span x-text="item.guessNumber"></span>
+            <span x-text="item.guesses"></span>
+            <span x-text="item.heat"></span>
+          </li>
+        </template>
+      </ul>
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>

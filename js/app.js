@@ -5,6 +5,7 @@ export default () => ({
   max: 100,
   guess: '',
   numberOfGuesses: 0,
+  guessData: [],
 
   getGuess() {
     guess = Math.floor(Math.random() * (this.max - this.min + 1)) + this.min;
@@ -12,9 +13,14 @@ export default () => ({
   },
 
   getHeat(input) {
-    console.log(input);
+    //this.guesses.push(input);
     const heating = setHeat(input, guess);
     this.numberOfGuesses += 1;
-    //outputHeat(heating, guesses);
+    const newGuessData = {
+      guessNumber: this.numberOfGuesses,
+      guesses: input,
+      heat: heating,
+    };
+    this.guessData.unshift(newGuessData);
   },
 });
