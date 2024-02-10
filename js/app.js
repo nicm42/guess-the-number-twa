@@ -14,7 +14,6 @@ export default () => ({
   },
 
   getHeat(input) {
-    //this.guesses.push(input);
     const heating = setHeat(input, guess);
     this.numberOfGuesses += 1;
     const newGuessData = {
