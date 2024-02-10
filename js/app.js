@@ -9,12 +9,13 @@ export default () => ({
   showCongrats: false,
 
   getGuess() {
-    guess = Math.floor(Math.random() * (this.max - this.min + 1)) + this.min;
-    console.log(guess);
+    this.guess =
+      Math.floor(Math.random() * (this.max - this.min + 1)) + this.min;
+    console.log(this.guess);
   },
 
   getHeat(input) {
-    const heating = setHeat(input, guess);
+    const heating = setHeat(input, this.guess);
     this.numberOfGuesses += 1;
     const newGuessData = {
       guessNumber: this.numberOfGuesses,
