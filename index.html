@@ -55,7 +55,8 @@
         />
         <button
           type="submit"
-          class="relative px-4 py-2 border border-solid border-purple-300 rounded bg-purple-200 hover:bg-purple-300 focus:bg-purple-300 transition-colors active:bg-purple-300 active:inset-x-px active:inset-y-px"
+          :disabled="showCongrats"
+          class="relative px-4 py-2 border border-solid border-purple-300 rounded bg-purple-200 hover:bg-purple-300 focus:bg-purple-300 transition-colors active:bg-purple-300 active:inset-x-px active:inset-y-px disabled:bg-slate-200 disabled:border-slate-300"
         >
           Guess
         </button>
