@@ -21,7 +21,7 @@ export default () => ({
       guesses: input,
       heat: heating,
     };
-    this.guessData.unshift(newGuessData);
+    this.guessData.push(newGuessData);
     if (heating === 'Correct') {
       this.showCongrats = true;
     }
