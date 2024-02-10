@@ -37,7 +37,8 @@
       @submit.prevent
       class="flex items-center gap-2 justify-center"
       x-data="{ inputNumber: 1 }"
-      x-init="$watch('inputNumber', (value) => inputNumber = value === '' ? '' : value < Number(min) ? min : value > Number(max) ? max : value)"
+      x-init="$watch('inputNumber', (value) => inputNumber = value === '' ? '' : value < min ? min : value > max ? max : value)"
+      @submit="getHeat(inputNumber)"
     >
       <label for="guess">Type a number</label>
       <input

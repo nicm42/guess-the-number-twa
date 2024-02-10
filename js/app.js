@@ -1,12 +1,20 @@
+import setHeat from './setHeat';
+
 export default () => ({
-  min: '1',
-  max: '100',
+  min: 1,
+  max: 100,
   guess: '',
+  numberOfGuesses: 0,
 
   getGuess() {
-    guess =
-      Math.floor(Math.random() * (Number(this.max) - Number(this.min) + 1)) +
-      Number(this.min);
+    guess = Math.floor(Math.random() * (this.max - this.min + 1)) + this.min;
     console.log(guess);
+  },
+
+  getHeat(input) {
+    console.log(input);
+    const heating = setHeat(input, guess);
+    this.numberOfGuesses += 1;
+    //outputHeat(heating, guesses);
   },
 });
