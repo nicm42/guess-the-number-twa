@@ -6,6 +6,7 @@ export default () => ({
   guess: '',
   numberOfGuesses: 0,
   guessData: [],
+  showCongrats: false,
 
   getGuess() {
     guess = Math.floor(Math.random() * (this.max - this.min + 1)) + this.min;
@@ -22,5 +23,8 @@ export default () => ({
       heat: heating,
     };
     this.guessData.unshift(newGuessData);
+    if (heating === 'Correct') {
+      this.showCongrats = true;
+    }
   },
 });
