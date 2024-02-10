@@ -62,7 +62,7 @@
         </button>
       </form>
 
-      <div class="mt-8 text-lg" x-show="showCongrats">
+      <div class="mt-8 text-lg" x-show="showCongrats" x-transition>
         <p
           class="mb-2"
           x-text="`Well done! You found the number in ${numberOfGuesses} ${numberOfGuesses === 1 ? 'guess' : 'guesses'}`"
