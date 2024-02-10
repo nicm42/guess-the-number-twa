@@ -12,20 +12,33 @@
   </head>
   <body
     class="h-full py-16 px-4 font-heebo text-black text-center bg-yellow-50"
+    x-data="app"
+    x-init="getGuess"
   >
     <h1 class="mb-8 text-3xl font-bold">Guess the Number</h1>
     <p class="mb-4">
       The computer is thinking of a number between
       <span class="minmax min relative"
-        >
+        ><span x-text="min"></span>
         <span class="absolute -left-0.5 bottom-0.5 w-2 h-1 bg-purple-300"></span
       ></span>
-      and <span class="minmax max relative"><span class="absolute -left-0.5 bottom-0.5 w-6 h-1 bg-purple-300"></span
-        ></span></span> (inclusive).
+      and
+      <span class="minmax max relative"
+        ><span x-text="max"></span
+        ><span
+          class="absolute -left-0.5 bottom-0.5 w-6 h-1 bg-purple-300"
+        ></span
+      ></span>
+      (inclusive).
     </p>
     <p class="mb-8 italic">Guess what that number is.</p>
 
-    <form class="flex items-center gap-2 justify-center">
+    <form
+      @submit.prevent
+      class="flex items-center gap-2 justify-center"
+      x-data="{ inputNumber: 1 }"
+      x-init="$watch('inputNumber', (value) => inputNumber = value === '' ? '' : value < Number(min) ? min : value > Number(max) ? max : value)"
+    >
       <label for="guess">Type a number</label>
       <input
         type="number"
@@ -35,6 +48,7 @@
         name="guess"
         required
         class="p-2 border border-solid border-purple-400 rounded text-base"
+        x-model="inputNumber"
       />
       <button
         type="submit"
