@@ -38,7 +38,7 @@
 
       <form
         @submit.prevent
-        class="flex items-center gap-2 justify-center"
+        class="flex flex-wrap items-center gap-2 justify-center"
         x-init="$watch('inputNumber', (value) => inputNumber = value === '' ? '' : value < min ? min : value > max ? max : value)"
         @submit="getHeat(inputNumber)"
       >
