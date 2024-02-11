@@ -68,11 +68,11 @@
     </div>
 
     <ul
-      class="temperature mt-10 flex flex-col gap-4 justify-center list-none rotate-180"
+      class="temperature mt-10 grid grid-cols=[1fr_auto_1fr] gap-4 justify-center list-none rotate-180"
     >
       <template x-for="(item, index) in guessData" :key="index">
         <li
-          class="flex justify-center items-center gap-4 motion-safe:animate-[shiftUp_1s_ease-in-out_forwards] motion-reduce: -rotate-180"
+          class="col-start-2 col-end-2 flex items-center gap-4 motion-safe:animate-[shiftUp_1s_ease-in-out_forwards] motion-reduce: -rotate-180"
         >
           <span x-text="`${item.guessNumber})`"></span>
           <span
