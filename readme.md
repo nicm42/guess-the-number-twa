@@ -12,11 +12,12 @@ A game where you guess the number, but it tells you how warm you are, rather tha
 
 ## General info
 
-TBC
+A standard guess the number between 1 and 100 game. However, it won't tell you whether your guess is higher or lower but how hot/cold it is based on how close you are. I originally wrote this in JavaScript, then TypeScript. This version I used to test out Tailwind CSS and Alpine.js.
 
 ## Screenshots
 
-TBC
+![Screenshot Mobile](screenshot_mobile.png)
+![Screenshot Desktop](screenshot_desktop.png)
 
 ## Technologies
 
@@ -26,8 +27,18 @@ TBC
 
 ## Setup
 
-TBC
+To view this project visit the [demo](https://guess-the-number-nm.pages.dev/) or download the files, open a terminal in that folder and install locally using npm:
+
+```
+npm install
+```
+
+Then run the app locally:
+
+```
+npm run dev
+```
 
 ## Status
 
-Project is: _in progress_
+Project is: _finished_

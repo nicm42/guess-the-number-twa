@@ -4,10 +4,88 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo&display=swap"
+      rel="stylesheet"
+    />
+    <title>Guess the Number</title>
   </head>
-  <body>
-    <div id="app"></div>
+  <body
+    class="h-full py-16 px-4 font-heebo text-black text-center bg-yellow-50"
+    x-data="app"
+    x-init="getGuess"
+  >
+    <h1 class="mb-8 text-3xl font-bold">Guess the Number</h1>
+    <p class="mb-4">
+      The computer is thinking of a number between
+      <span class="minmax min relative"
+        ><span x-text="min"></span>
+        <span class="absolute -left-0.5 bottom-0.5 w-2 h-1 bg-purple-300"></span
+      ></span>
+      and
+      <span class="minmax max relative"
+        ><span x-text="max"></span
+        ><span
+          class="absolute -left-0.5 bottom-0.5 w-6 h-1 bg-purple-300"
+        ></span
+      ></span>
+      (inclusive).
+    </p>
+    <p class="mb-8 italic">Guess what that number is.</p>
+
+    <form
+      @submit.prevent
+      class="flex flex-wrap items-center gap-2 justify-center"
+      x-init="$watch('inputNumber', (value) => inputNumber = value === '' ? '' : value < min ? min : value > max ? max : value)"
+      @submit="getHeat(inputNumber)"
+    >
+      <label for="guess">Type a number</label>
+      <input
+        type="number"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        id="guess"
+        name="guess"
+        required
+        class="p-2 border border-solid border-purple-400 rounded text-base"
+        x-model="inputNumber"
+      />
+      <button
+        type="submit"
+        :disabled="showCongrats"
+        class="relative px-4 py-2 border border-solid border-purple-300 rounded bg-purple-200 hover:bg-purple-300 focus:bg-purple-300 transition-colors active:bg-purple-300 active:inset-x-px active:inset-y-px disabled:bg-slate-200 disabled:border-slate-300"
+      >
+        Guess
+      </button>
+    </form>
+
+    <div class="mt-8 text-lg" x-show="showCongrats" x-transition>
+      <p
+        class="mb-2"
+        x-text="`Well done! You found the number in ${numberOfGuesses} ${numberOfGuesses === 1 ? 'guess' : 'guesses'}`"
+      ></p>
+      <p>Refresh the page to play again.</p>
+    </div>
+
+    <ul
+      class="temperature mt-10 grid grid-cols=[1fr_auto_1fr] gap-4 justify-center list-none rotate-180"
+    >
+      <template x-for="(item, index) in guessData" :key="index">
+        <li
+          class="col-start-2 col-end-2 flex items-center gap-4 motion-safe:animate-[shiftUp_1s_ease-in-out_forwards] motion-reduce: -rotate-180"
+        >
+          <span x-text="`${item.guessNumber})`"></span>
+          <span
+            class="flex justify-center items-center w-10 h-10 p-2 rounded-full bg-yellow-200 text-center leading-none"
+            x-text="item.guesses"
+          ></span>
+          <span
+            :class="{ 'font-bold': item.heat === 'Correct', 'text-red-900': item.heat === 'Boiling', 'text-red-700': item.heat === 'Hot', 'text-red-500': item.heat === 'Warm', 'text-blue-700': item.heat === 'Cold', 'text-blue-900': item.heat === 'Freezing' }"
+            x-text="item.heat"
+          ></span>
+        </li>
+      </template>
+    </ul>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
